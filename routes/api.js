@@ -30,7 +30,7 @@ route.get('/take', (req, res) => {
 });
 
 route.post('/in', (req, res) => {
-    data.changeCart(req.body.name, req.body.quantity).then(()=> {
+    data.changeCart(req.body.id, req.body.qty).then(()=> {
     res.redirect('/api')
 }).catch((err) => {
     res.send(err)

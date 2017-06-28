@@ -2,25 +2,28 @@
  * Created by Ritik on 29-06-2017.
  */
 const Sequelize = require('sequelize');
-const db = new Sequelize( 'test', 'mypass', 'shoppingcart' {
-        host: 'localhost',
-        dialect: 'mysql',
-        pool: {
+const db = new Sequelize({
+    username: 'root',
+    password: 'password',
+    database: 'shoppingcart',
+    host: 'localhost',
+    dialect: 'mysql',
+    pool: {
         max: 5,
-            min: 0,
-            idle: 5000
+        min: 0,
+        idle: 10000
     }
-});
 
+});
 const Cart = db.define('cart', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    cost: Sequelize.INTEGER,
-    qty: Sequelize.INTEGER,
     name: Sequelize.STRING,
+    qty: Sequelize.INTEGER,
+    cost: Sequelize.INTEGER,
     total: Sequelize.INTEGER,
 
 });
@@ -40,17 +43,19 @@ function getCarts () {
 }
 
 
-function changeCart(id, quantum){
-    console.log("change cart called", name , quantum)
+function changeCart(id1, qty1){
+    console.log("change cart called")
     return Cart.update({
-        qty: quantum
+        qty: {
+            $eq: qty1+1,
+        }
     }, {
         where: {
-            name: {
-                $eq: name,
+            id: {
+                $eq: id1,
             }
         }
-    });
+    })
 }
 
 function addCart (cart) {
