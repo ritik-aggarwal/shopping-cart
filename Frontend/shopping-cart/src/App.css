@@ -18,6 +18,28 @@
   font-size: large;
 }
 
+.panel-body {
+  width:50%;
+  display:inline-block;
+}
+
+.panel-primary {
+  text-align:center;
+}
+
+.navbar {
+  margin-bottom: 50px;
+  border-radius: 0;
+}
+
+.jumbotron {
+ margin-bottom: 0;
+}
+footer {
+  background-color: #f2f2f2;
+  padding: 25px;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
