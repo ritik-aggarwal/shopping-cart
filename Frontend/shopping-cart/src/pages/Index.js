@@ -1,12 +1,46 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
+import { findDOMNode } from "react-dom";
+import $ from "jquery";
 //import { connect } from 'react-redux';
 //import { autheticate } from '../actions/sessionAction'
 class Index extends Component {
+
+  constructor(props, context) {
+		super(props, context);
+		//this.state = { credentials: {uid: '', password: '' }, session: !!sessionStorage.jwt};
+		this.getItemData = this.getItemData.bind(this);
+	}
+
+  getItemData(e) {
+		var el = e.target;
+    $(el).prop('disabled', true);
+    el.value = "Added";
+    var name = $(el).parents(".panel").find(".panel-heading").text();
+    var cost = $(el).parents(".panel").find(".panel-footer .item-cost").text();
+    var data = {};
+    data.name = name;
+    data.cost = cost;
+    data.qty = 1;
+    console.log(data);
+    //saveCart(data);
+    var retreivedData =  JSON.parse(
+      localStorage.getItem('cart_data') ? localStorage.getItem('cart_data') : false);
+
+    if(retreivedData){
+      retreivedData.items.push(data);
+      localStorage.setItem('cart_data', JSON.stringify(retreivedData));
+    } else {
+      var res = {};
+      res.items = [];
+      res.items.push(data);
+      localStorage.setItem('cart_data', JSON.stringify(res));
+    }
+  }
+
   render() {
     return (
       <div className="App">
-
 
         <div className="jumbotron">
           <div className="container text-center">
@@ -52,7 +86,7 @@ class Index extends Component {
                       Best buy price: $<span className="item-cost">99</span><br/>You save: $10.55
                     </div>
                     <div className="col-sm-4">
-                      <input className="add-to-cart" type="button" name="button_1" value="Add to cart"/>
+                      <input className="add-to-cart" type="button" name="button_1" value="Add to cart" onClick={this.getItemData} />
                     </div>
                   </div>
                 </div>
@@ -68,7 +102,7 @@ class Index extends Component {
                       Best buy price: $<span className="item-cost">99</span><br/>You save: $10.55
                     </div>
                     <div className="col-sm-4">
-                      <input className="add-to-cart" type="button" name="button_2" value="Add to cart"/>
+                      <input className="add-to-cart" type="button" name="button_2" value="Add to cart" onClick={this.getItemData} />
                     </div>
                   </div>
                 </div>
@@ -84,7 +118,7 @@ class Index extends Component {
                       Best buy price: $<span className="item-cost">109</span><br/>You save: $12.59
                     </div>
                     <div className="col-sm-4">
-                      <input className="add-to-cart" type="button" name="button_3" value="Add to cart"/>
+                      <input className="add-to-cart" type="button" name="button_3" value="Add to cart" onClick={this.getItemData} />
                     </div>
                   </div>
                 </div>
@@ -100,7 +134,7 @@ class Index extends Component {
                       Best buy price: $<span className="item-cost">89</span><br/>You save: $9.99
                     </div>
                     <div className="col-sm-4">
-                      <input type="button" className="add-to-cart" name="button_4" value="Add to cart"/>
+                      <input type="button" className="add-to-cart" name="button_4" value="Add to cart" onClick={this.getItemData} />
                     </div>
                   </div>
                 </div>
@@ -116,7 +150,7 @@ class Index extends Component {
                       Best buy price: $<span className="item-cost">139</span><br/>You save: $13.49
                     </div>
                     <div className="col-sm-4">
-                      <input className="add-to-cart" type="button" name="button_5" value="Add to cart"/>
+                      <input className="add-to-cart" type="button" name="button_5" value="Add to cart" onClick={this.getItemData} />
                     </div>
                   </div>
                 </div>
@@ -132,7 +166,7 @@ class Index extends Component {
                       Best buy price: $<span className="item-cost">149</span><br/>You save: $15.99
                     </div>
                     <div className="col-sm-4">
-                      <input className="add-to-cart" type="button" name="button_6" value="Add to cart"/>
+                      <input className="add-to-cart" type="button" name="button_6" value="Add to cart" onClick={this.getItemData} />
                     </div>
                   </div>
                 </div>

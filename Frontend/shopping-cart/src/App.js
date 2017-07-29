@@ -4,6 +4,7 @@ import {
   //Switch,
   Route
 } from 'react-router-dom';
+import Home from "./pages/Home.js";
 import Index from "./pages/Index.js";
 import Cart from "./pages/Cart.js";
 import Footer from "./Component/Footer";
@@ -15,6 +16,7 @@ export default class App extends Component {
       <div className="App">
         <Router >
           <div>
+            <Route exact path="/" component={Home} />
             <Route exact path="/index" component={Index} />
             <Route exact path="/cart" component={Cart} />
           </div>
